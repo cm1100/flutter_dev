@@ -87,11 +87,6 @@ class _ExpensesState extends State<Expenses> {
       );
     }
 
-    var renderWidget = Column;
-    if (width > 600) {
-      renderWidget = Row;
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter Expense Tracker'),
