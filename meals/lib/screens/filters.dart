@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meals/providers/filters_providor.dart';
 
-class FilterScreen extends ConsumerWidget {
-  const FilterScreen({super.key});
+// import 'package:meals/screens/tabs.dart';
+// import 'package:meals/widgets/main_drawer.dart';
+import 'package:meals/providers/filters_provider.dart';
+
+class FiltersScreen extends ConsumerWidget {
+  const FiltersScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final activeFilters = ref.watch(filtersProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Fliters'),
+        title: const Text('Your Filters'),
       ),
       body: Column(
         children: [
@@ -23,13 +26,13 @@ class FilterScreen extends ConsumerWidget {
                   .setFilter(Filter.glutenFree, isChecked);
             },
             title: Text(
-              'Gluten-Free',
+              'Gluten-free',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
             subtitle: Text(
-              'Only Include gluten free meals',
+              'Only include gluten-free meals.',
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
@@ -45,13 +48,35 @@ class FilterScreen extends ConsumerWidget {
                   .setFilter(Filter.lactoseFree, isChecked);
             },
             title: Text(
-              'Lactose-Free',
+              'Lactose-free',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
             ),
             subtitle: Text(
-              'Only Include lactose free meals',
+              'Only include lactose-free meals.',
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            activeColor: Theme.of(context).colorScheme.tertiary,
+            contentPadding: const EdgeInsets.only(left: 34, right: 22),
+          ),
+          SwitchListTile(
+            value: activeFilters[Filter.vegetarian]!,
+            onChanged: (isChecked) {
+              ref
+                  .read(filtersProvider.notifier)
+                  .setFilter(Filter.vegetarian, isChecked);
+            },
+            title: Text(
+              'Vegetarian',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            subtitle: Text(
+              'Only include vegetarian meals.',
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
@@ -73,7 +98,7 @@ class FilterScreen extends ConsumerWidget {
                   ),
             ),
             subtitle: Text(
-              'Only Include gluten free meals',
+              'Only include vegan meals.',
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
@@ -81,28 +106,6 @@ class FilterScreen extends ConsumerWidget {
             activeColor: Theme.of(context).colorScheme.tertiary,
             contentPadding: const EdgeInsets.only(left: 34, right: 22),
           ),
-          SwitchListTile(
-            value: activeFilters[Filter.vegeterian]!,
-            onChanged: (isChecked) {
-              ref
-                  .read(filtersProvider.notifier)
-                  .setFilter(Filter.vegeterian, isChecked);
-            },
-            title: Text(
-              'Vegeterian',
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-            ),
-            subtitle: Text(
-              'Only Include gluten free meals',
-              style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-            ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
-          )
         ],
       ),
     );

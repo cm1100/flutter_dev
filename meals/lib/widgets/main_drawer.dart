@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
-  final void Function(String Identifier) onSelectScreen;
+  const MainDrawer({super.key, required this.onSelectScreen});
 
-  MainDrawer({super.key, required this.onSelectScreen});
+  final void Function(String identifier) onSelectScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class MainDrawer extends StatelessWidget {
                       .primaryContainer
                       .withOpacity(0.8),
                 ],
-                begin: Alignment.topRight,
+                begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
             ),
@@ -32,19 +32,16 @@ class MainDrawer extends StatelessWidget {
                   size: 48,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                const SizedBox(
-                  width: 18,
-                ),
+                const SizedBox(width: 18),
                 Text(
                   'Cooking Up!',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                )
+                ),
               ],
             ),
           ),
-          // add links here
           ListTile(
             leading: Icon(
               Icons.restaurant,
